@@ -1,459 +1,310 @@
-# 🤖 RAG EdTech Assistant
+# RAG-Based AI/ML Educational Knowledge Assistant
 
-An AI-powered educational assistant built using **Retrieval-Augmented Generation (RAG)** to answer user questions from a curated knowledge base of educational content.
+An intelligent educational knowledge assistant built using **Retrieval-Augmented Generation (RAG)**, LangChain, ChromaDB, Hugging Face embeddings, and Groq LLMs. The system retrieves relevant information from multiple knowledge sources and generates context-aware answers to AI/ML-related questions.
 
-The system retrieves relevant information from documents and uses a Large Language Model (LLM) to generate context-aware responses, reducing reliance on the model's general knowledge.
+## 🏢 Project Context
 
----
+This project was independently designed and developed as a **client project during my AI Internship at Rubixe (May–October 2026)**.
+
+I independently handled the complete project implementation, from organizing knowledge sources to building the Retrieval-Augmented Generation pipeline and integrating the language model.
+
+The project provided practical experience in developing a Generative AI solution for a client-oriented requirement.
 
 ## 📌 Project Overview
 
-The **RAG EdTech Assistant** is a Generative AI application designed to help students and learners interact with educational content using natural language.
+Finding accurate and relevant information across multiple educational resources can be time-consuming. Traditional keyword-based search systems may not understand the meaning or context behind a question.
 
-Instead of asking an LLM to answer questions only from its pretrained knowledge, the application first retrieves relevant information from a custom knowledge base and then provides that context to the LLM.
+This project addresses that challenge by implementing a RAG-based knowledge assistant that retrieves relevant information from PDF documents, CSV files, and web URLs before generating responses using a Large Language Model (LLM).
 
-### Core Pipeline
+The system combines document retrieval with LLM-based generation to provide responses grounded in the retrieved knowledge.
 
-```text
-User Question
-      ↓
-Query Processing
-      ↓
-Vector Similarity Search
-      ↓
-Relevant Documents / Chunks
-      ↓
-Context Construction
-      ↓
-Large Language Model
-      ↓
-Generated Answer
-```
+## 🎯 Project Objectives
 
----
+- Develop an AI-powered educational knowledge assistant.
+- Integrate multiple knowledge sources, including PDF, CSV, and web URLs.
+- Extract, preprocess, and organize document content.
+- Generate semantic embeddings using transformer-based models.
+- Store document embeddings in a vector database.
+- Retrieve relevant information using semantic search.
+- Generate context-aware answers using an LLM.
+- Explore evaluation techniques for retrieval and response quality.
 
-## 🎯 Problem Statement
+## ✨ Key Features
 
-Educational information is often distributed across multiple PDFs, CSV files, webpages, and other resources. Searching through these resources manually can be time-consuming.
+- **Multi-source Document Ingestion:** Supports PDF documents, CSV files, and web URLs.
+- **Text Preprocessing:** Extracts and prepares content for retrieval.
+- **Document Chunking:** Splits documents into smaller text segments.
+- **Transformer-based Embeddings:** Converts text into numerical vector representations.
+- **Vector Database:** Uses ChromaDB for storing and retrieving embeddings.
+- **Semantic Retrieval:** Retrieves relevant content based on the meaning of user queries.
+- **MMR Retrieval:** Uses Maximal Marginal Relevance to balance relevance and diversity in retrieved results.
+- **LLM Integration:** Uses Groq API with the Llama 3.3 70B Versatile model.
+- **Context-aware Responses:** Generates answers using retrieved document context.
+- **Reusable Knowledge Base:** Supports retrieval from an organized collection of educational resources.
 
-This project aims to provide a conversational interface through which users can ask questions in natural language and receive answers based on the information available in the configured knowledge base.
+## 🧠 System Architecture
 
----
-
-## 💡 Key Features
-
-* 📄 **PDF Knowledge Base**
-
-  * Processes educational content from PDF documents.
-
-* 📊 **CSV Knowledge Base**
-
-  * Supports structured information stored in CSV files.
-
-* 🌐 **URL-Based Knowledge**
-
-  * Allows information from configured web resources to be incorporated into the knowledge base.
-
-* ✂️ **Document Chunking**
-
-  * Splits large documents into smaller chunks suitable for retrieval.
-
-* 🔢 **Text Embeddings**
-
-  * Converts text into numerical vector representations for semantic search.
-
-* 🗄️ **Vector Database**
-
-  * Uses ChromaDB for storing and retrieving document embeddings.
-
-* 🔎 **Semantic Retrieval**
-
-  * Retrieves relevant knowledge based on the meaning of the user's query.
-
-* 🧠 **LLM-Based Answer Generation**
-
-  * Uses a Large Language Model to generate responses using retrieved context.
-
-* 🔗 **RAG Architecture**
-
-  * Combines information retrieval with generative AI.
-
-* 🔐 **Environment-Based API Configuration**
-
-  * API credentials are kept outside the source code using environment variables.
-
----
-
-## 🏗️ System Architecture
+The project follows a Retrieval-Augmented Generation workflow.
 
 ```text
-                    ┌──────────────────────┐
-                    │    Knowledge Base    │
-                    │                      │
-                    │ PDF │ CSV │ URL Data │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │   Document Loading   │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │    Text Chunking     │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │     Embeddings       │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │      ChromaDB        │
-                    │    Vector Store      │
-                    └──────────┬───────────┘
-                               │
-                     User Query
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ Semantic Retrieval   │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ Retrieved Context    │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │       LLM            │
-                    │   Response Generation│
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │     Final Answer     │
-                    └──────────────────────┘
+                  User Query
+                      |
+                      v
+              Query Processing
+                      |
+                      v
+              Semantic Retrieval
+                      |
+                      v
+              ChromaDB Vector Store
+                      |
+                      v
+             Relevant Document Chunks
+                      |
+                      v
+              Context Construction
+                      |
+                      v
+              Groq LLM Integration
+                      |
+                      v
+              Generated Response
+                      |
+                      v
+                 User Output
+
+
+       Knowledge Sources
+       -----------------
+       PDF Documents
+       CSV Files
+       Web URLs
+             |
+             v
+       Document Loading
+             |
+             v
+       Text Extraction
+             |
+             v
+       Preprocessing & Chunking
+             |
+             v
+       Embedding Generation
+             |
+             v
+       ChromaDB Vector Store
 ```
 
----
+## 🔄 How the RAG Pipeline Works
+
+### 1. Knowledge Source Collection
+The system collects educational information from:
+- PDF documents
+- CSV datasets
+- Web URLs
+
+### 2. Document Loading and Extraction
+Content is loaded from the available sources and extracted into a processable text format.
+
+### 3. Text Preprocessing and Chunking
+The extracted content is cleaned and divided into smaller chunks to support efficient retrieval.
+
+### 4. Embedding Generation
+Transformer-based embedding models convert document chunks into vector representations.
+
+### 5. Vector Storage
+The generated embeddings are stored in ChromaDB.
+
+### 6. Query Processing and Retrieval
+When a user submits a question, the system retrieves relevant document chunks using semantic retrieval and MMR.
+
+### 7. Context Construction
+The retrieved information is organized and passed as context to the language model.
+
+### 8. Response Generation
+The Groq-hosted Llama model generates a response based on the retrieved context and user query.
 
 ## 🛠️ Technology Stack
 
-| Category                  | Technologies                   |
-| ------------------------- | ------------------------------ |
-| Programming Language      | Python                         |
-| LLM Application Framework | LangChain                      |
-| Vector Database           | ChromaDB                       |
-| LLM Provider              | Groq                           |
-| Generative AI             | Large Language Models          |
-| Retrieval                 | Semantic / Vector Search       |
-| Data Sources              | PDF, CSV, URL                  |
-| Environment Management    | `.env` / Environment Variables |
-| Development               | Jupyter Notebook, VS Code      |
-| Version Control           | Git / GitHub                   |
-
-> Update this table if your implementation uses a different embedding model, document loader, framework, or application framework.
-
----
+| Category | Technologies |
+|---|---|
+| Programming Language | Python |
+| Notebook Environment | Jupyter Notebook |
+| RAG Framework | LangChain |
+| Vector Database | ChromaDB |
+| Embedding Models | Hugging Face / Sentence Transformers |
+| Large Language Model | Llama 3.3 70B Versatile |
+| LLM API | Groq |
+| PDF Processing | PyPDF |
+| Data Processing | Pandas, NumPy |
+| Web Content Extraction | Requests, BeautifulSoup |
+| Visualization | Matplotlib |
+| Environment Configuration | python-dotenv |
+| Version Control | Git, GitHub |
 
 ## 📂 Project Structure
 
 ```text
-RAG-EdTech-Assistant/
+rag-educational-assistant/
 │
-├── 📁 data/
+├── AI_ML_RAG_Chatbot.ipynb
+│
+├── data/
+│   ├── csv/
+│   │   ├── AI_Python_DataScience_Glossary.csv
+│   │   ├── ml_algorithms.csv
+│   │   ├── ml_interview_questions.csv
+│   │   ├── model_evaluation_metrics.csv
+│   │   └── python_libraries.csv
+│   │
 │   ├── pdf/
-│   └── csv/
+│   │   └── Educational PDF resources
+│   │
+│   └── url.txt
 │
-├── 📁 notebooks/
-│   └── experiments.ipynb
-│
-├── 📁 src/
-│   ├── document_loader.py
-│   ├── text_splitter.py
-│   ├── embeddings.py
-│   ├── vector_store.py
-│   ├── retriever.py
-│   └── llm.py
-│
-├── 📁 screenshots/
-│   └── chatbot-demo.png
-│
-├── app.py
-├── requirements.txt
-├── .env.example
 ├── .gitignore
+├── requirements.txt
 └── README.md
 ```
 
-> Keep only folders and files that actually exist in your repository. Do not create or claim files that are not part of your implementation.
+**Note:** Only include files that are actually present in the GitHub repository. Do not upload copyrighted PDF books or other materials unless you have permission to redistribute them.
 
----
+## ⚙️ Installation and Setup
 
-## ⚙️ How RAG Works in This Project
+### Prerequisites
 
-### 1. Document Ingestion
+- Python 3.10 or later
+- Jupyter Notebook
+- Git
+- Groq API key
 
-Educational information is collected from supported sources such as PDFs, CSV files, and configured URLs.
-
-### 2. Text Extraction
-
-The content is extracted from the source documents and converted into processable text.
-
-### 3. Text Chunking
-
-Large documents are divided into smaller chunks.
-
-Chunking helps the retrieval system identify focused pieces of information instead of processing an entire document at once.
-
-### 4. Embedding Generation
-
-The text chunks are converted into vector representations using an embedding model.
-
-Similar pieces of text are represented by vectors that are closer in the embedding space.
-
-### 5. Vector Storage
-
-The generated embeddings and their associated text are stored in **ChromaDB**.
-
-### 6. Query Processing
-
-When a user asks a question, the question is converted into an embedding.
-
-### 7. Semantic Retrieval
-
-The system searches the vector database and retrieves the most relevant chunks of information.
-
-### 8. Context Construction
-
-The retrieved information is provided as context to the LLM.
-
-### 9. Response Generation
-
-The LLM generates a response using the retrieved context.
-
----
-
-## 🔄 Example Workflow
-
-### User Query
-
-```text
-What topics are covered in the Machine Learning module?
-```
-
-### Retrieval
-
-The system searches the vector database for relevant educational content.
-
-### Retrieved Context
-
-```text
-Relevant content retrieved from the configured knowledge base...
-```
-
-### LLM
-
-The retrieved context is passed to the language model.
-
-### Final Response
-
-```text
-The Machine Learning module covers the topics available
-in the retrieved educational material...
-```
-
-The exact response depends on the documents available in the knowledge base.
-
----
-
-## 🚀 Installation
-
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/ManasiKOLHAL/RAG-EdTech-Assistant.git
+git clone https://github.com/ManasiKOLHAL/rag-educational-assistant.git
 ```
-
-### 2. Navigate to the project
 
 ```bash
-cd RAG-EdTech-Assistant
+cd rag-educational-assistant
 ```
 
-### 3. Create a virtual environment
+### 2. Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### 4. Activate the environment on Windows
+### 3. Activate the Environment
+
+**Windows:**
 
 ```bash
 venv\Scripts\activate
 ```
 
-### 5. Install dependencies
+**Linux / macOS:**
+
+```bash
+source venv/bin/activate
+```
+
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+### 5. Configure the Groq API Key
 
-## 🔑 Environment Configuration
+Create a file named `key.env` in the project root directory.
 
-Create a `.env` file in the project root.
+Add the following:
 
-```text
-GROQ_API_KEY=your_api_key_here
-```
-
-For portfolio repositories, create a `.env.example` file instead:
-
-```text
+```env
 GROQ_API_KEY=your_groq_api_key
 ```
 
-The actual `.env` file should be included in `.gitignore`.
+Replace `your_groq_api_key` with your actual Groq API key.
 
----
+**Important:** Never upload `key.env` or expose your API key on GitHub.
 
-## ▶️ Running the Application
+### 6. Run the Notebook
 
-Use the actual entry-point command for your project.
-
-For example:
+Start Jupyter Notebook:
 
 ```bash
-python app.py
+jupyter notebook
 ```
 
-If your project uses a different entry point, replace the command above with the command required by your implementation.
-
----
-
-## 📦 Requirements
-
-The project dependencies are listed in:
+Open:
 
 ```text
-requirements.txt
+AI_ML_RAG_Chatbot.ipynb
 ```
 
-Install them using:
+Execute the notebook cells in the appropriate order.
 
-```bash
-pip install -r requirements.txt
-```
+## 📊 Evaluation Approach
 
----
+The project explores evaluation concepts for assessing retrieval quality and generated responses.
 
+Evaluation concepts covered include:
 
-### Example
+- Precision
+- Recall
+- Mean Reciprocal Rank (MRR)
+- Hit Rate
+- Retrieval Accuracy
+- Context Relevance
+- Faithfulness
+- Groundedness
+- Hallucination Rate
+- Response Latency
 
-```text
-User Question
-      ↓
-Retrieved Educational Context
-      ↓
-LLM Processing
-      ↓
-AI Generated Answer
-```
-
----
-
-## 📊 Evaluation
-
-The project can be evaluated using retrieval and generation quality metrics such as:
-
-* Retrieval relevance
-* Context relevance
-* Answer relevance
-* Faithfulness / groundedness
-* Response latency
-* Retrieval accuracy
-
-If you have measured these metrics, add your **actual results** here.
-
-Example:
-
-| Metric             |           Result |
-| ------------------ | ---------------: |
-| Retrieval Accuracy | Add actual value |
-| Answer Relevance   | Add actual value |
-| Response Time      | Add actual value |
-
-Do not report estimated or unmeasured values as project results.
-
----
+**Note:** These are evaluation concepts explored in the project. Numerical performance results should only be reported when supported by verified evaluation calculations and outputs.
 
 ## ⚠️ Limitations
 
-* The quality of generated responses depends on the quality of the knowledge base.
-* Incorrect or incomplete source documents can lead to incomplete answers.
-* Retrieval quality depends on chunking, embeddings, and search configuration.
-* LLM-generated responses may still contain inaccuracies.
-* API availability and rate limits may affect application usage.
+- Response quality depends on the relevance and quality of the available knowledge sources.
+- The system depends on an active Groq API connection for LLM-based generation.
+- Large document collections may require additional optimization.
+- Generated responses may still require human verification.
+- Retrieval quality depends on document preprocessing, chunking, and embedding quality.
 
----
+## 🚀 Future Improvements
 
-## 🔮 Future Improvements
+- Develop a user-friendly web interface using Flask or FastAPI.
+- Add support for additional document formats.
+- Improve retrieval using hybrid search techniques.
+- Implement more comprehensive automated RAG evaluation.
+- Add document-level source citations and reference tracking.
+- Optimize retrieval performance for larger knowledge bases.
+- Explore deployment and cloud hosting options.
 
-* [ ] Add source citations to generated answers
-* [ ] Add retrieval evaluation
-* [ ] Add response faithfulness evaluation
-* [ ] Implement conversation memory
-* [ ] Improve chunking strategies
-* [ ] Experiment with different embedding models
-* [ ] Add reranking
-* [ ] Add automated tests
-* [ ] Add production logging and monitoring
-* [ ] Deploy the application
-* [ ] Add authentication if required
-* [ ] Optimize retrieval latency
+## 📚 Learning Outcomes
 
----
+Through this project, I gained practical experience in:
 
-## 🎓 Learning Outcomes
-
-Through this project, I gained practical experience with:
-
-* Retrieval-Augmented Generation
-* Large Language Models
-* LangChain
-* Vector databases
-* Semantic search
-* Text embeddings
-* Document processing
-* Prompt engineering
-* Generative AI application development
-* API integration
-* Environment-variable management
-* AI application architecture
-
----
+- Building an end-to-end Retrieval-Augmented Generation pipeline.
+- Working with LangChain and ChromaDB.
+- Processing PDF, CSV, and web-based knowledge sources.
+- Using transformer-based embedding models.
+- Implementing semantic search and MMR retrieval.
+- Integrating Large Language Models through the Groq API.
+- Managing API keys using environment variables.
+- Understanding retrieval and response evaluation techniques.
+- Independently implementing a client-oriented Generative AI project.
 
 ## 👩‍💻 Author
 
 **Manasi Kolhal**
 
-B.E. Electronics & Telecommunication Engineering
+AI/ML Engineer | Machine Learning | Deep Learning | Generative AI
 
-### GitHub
-
-https://github.com/ManasiKOLHAL
-
-### LinkedIn
-
-www.linkedin.com/in/manasi-kolhal
+- GitHub: [ManasiKOLHAL](https://github.com/ManasiKOLHAL)
+- LinkedIn: [Manasi Kolhal](https://www.linkedin.com/in/manasi-kolhal/)
 
 ---
 
-## ⭐ Acknowledgements
-
-This project was developed as part of my learning and practical work in **Artificial Intelligence, Generative AI, and Machine Learning**.
+⭐ If you find this project interesting, feel free to explore the repository!
