@@ -1,0 +1,16 @@
+Metric,Category,Task Type,Range,Interpretation
+Accuracy,Classification,Binary/Multiclass,0.0 to 1.0,Higher is better; percentage of correct predictions
+Precision,Classification,Binary/Multiclass,0.0 to 1.0,Higher is better; ability to not label a negative sample as positive
+Recall,Classification,Binary/Multiclass,0.0 to 1.0,Higher is better; ability to find all the positive samples
+F1-Score,Classification,Binary/Multiclass,0.0 to 1.0,Higher is better; harmonic mean of precision and recall
+ROC-AUC,Classification,Binary/Multiclass,0.0 to 1.0,Higher is better; ability of model to distinguish between classes
+Log Loss,Classification,Binary/Multiclass,0.0 to Infinity,Lower is better; penalizes confident wrong predictions
+MAE,Regression,Continuous,0.0 to Infinity,Lower is better; Mean Absolute Error in target units
+MSE,Regression,Continuous,0.0 to Infinity,Lower is better; Mean Squared Error; penalizes larger errors more
+RMSE,Regression,Continuous,0.0 to Infinity,Lower is better; Root Mean Squared Error in target units
+R-Squared,Regression,Continuous,-Infinity to 1.0,Higher is better; variance explained by the model
+Adjusted R-Squared,Regression,Continuous,-Infinity to 1.0,Higher is better; R-squared adjusted for number of predictors
+BLEU,Generative (NLP),Text Generation,0.0 to 1.0,Higher is better; counts n-gram overlaps with reference text
+ROUGE,Generative (NLP),Text Summarization,0.0 to 1.0,Higher is better; measures recall of n-grams against reference text
+Inception Score,Generative (CV),Image Generation,1.0 to Infinity,Higher is better; evaluates clarity and diversity of images
+Silhouette Score,Clustering,Unsupervised,-1.0 to 1.0,Higher is better; how close a data point is to its own cluster

@@ -1,0 +1,31 @@
+Library,Type,Primary Purpose
+os,Built-in,Interact with the operating system and file paths
+sys,Built-in,System-specific parameters and command-line arguments
+datetime,Built-in,Manipulate dates and times
+math,Built-in,Mathematical functions and calculations
+json,Built-in,Parse and generate JSON data
+csv,Built-in,Read and write CSV files
+re,Built-in,Regular expression operations for pattern matching
+random,Built-in,Generate pseudo-random numbers
+collections,Built-in,High-performance container datatypes
+pandas,External,Data manipulation and tabular data analysis
+numpy,External,Numerical computing and multi-dimensional arrays
+matplotlib,External,Static and interactive data visualizations
+seaborn,External,Statistical data visualization built on Matplotlib
+scikit-learn,External,Machine learning algorithms and data preprocessing
+scipy,External,Scientific and technical computing routines
+tensorflow,External,Deep learning framework developed by Google
+pytorch,External,Deep learning framework developed by Meta
+requests,External,Send HTTP requests to interact with web APIs
+beautifulsoup4,External,Parse HTML and XML documents for web scraping
+scrapy,External,High-level web crawling and data extraction
+flask,External,Lightweight micro-framework for building web applications
+django,External,Full-featured web framework with an ORM and admin panel
+fastapi,External,High-performance web API framework built with pydantic
+pydantic,External,Data validation and settings management using type hints
+pytest,External,Writing small and scalable software testing suites
+pillow,External,Image processing library supporting multiple formats
+opencv-python,External,Computer vision and real-time image/video processing
+sqlalchemy,External,SQL Toolkit and Object-Relational Mapper (ORM)
+boto3,External,Amazon Web Services (AWS) SDK for Python
+openpyxl,External,Read and write Excel 2010 xlsx/xlsm files
