@@ -1,0 +1,11 @@
+https://python.langchain.com/docs/introduction/
+https://python.langchain.com/docs/concepts/rag/
+https://python.langchain.com/docs/how_to/
+https://docs.trychroma.com/docs/overview/introduction
+https://huggingface.co/docs/transformers/index
+https://huggingface.co/docs/sentence-transformers/index
+https://console.groq.com/docs
+https://www.promptingguide.ai/
+https://scikit-learn.org/stable/user_guide.html
+https://developers.google.com/machine-learning/crash-course
+
