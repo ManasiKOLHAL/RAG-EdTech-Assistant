@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="rag-chatbot-banner.png" alt="RAG-Based AI/ML Educational Knowledge Assistant Banner" width="100%">
+</p>
+
 # RAG-Based AI/ML Educational Knowledge Assistant
 
 An intelligent educational knowledge assistant built using **Retrieval-Augmented Generation (RAG)**, LangChain, ChromaDB, Hugging Face embeddings, and Groq LLMs. The system retrieves relevant information from multiple knowledge sources and generates context-aware answers to AI/ML-related questions.
