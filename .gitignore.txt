@@ -1,0 +1,22 @@
+
+# API keys and environment files
+key.env
+.env
+.env.*
+
+# Local vector database
+chroma_db/
+chroma_db
+
+# Python cache and virtual environment
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Logs
+logs/
+*.log
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
