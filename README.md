@@ -168,7 +168,7 @@ rag-educational-assistant/
 └── README.md
 ```
 
-**Note:** Only include files that are actually present in the GitHub repository. Do not upload copyrighted PDF books or other materials unless you have permission to redistribute them.
+**PDF Resources:** The `data/pdf/` folder is created locally when required. PDF documents are not included in this repository. Add your own educational PDF resources to this folder before running the PDF ingestion section of the notebook.
 
 ## ⚙️ Installation and Setup
 
@@ -182,11 +182,11 @@ rag-educational-assistant/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/ManasiKOLHAL/rag-educational-assistant.git
+git clone https://github.com/ManasiKOLHAL/RAG-EdTech-Assistant.git
 ```
 
 ```bash
-cd rag-educational-assistant
+cd RAG-EdTech-Assistant
 ```
 
 ### 2. Create a Virtual Environment
